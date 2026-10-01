@@ -1,0 +1,49 @@
+[
+  {
+    "order_id": "O001",
+    "customer_id": "C001",
+    "date": "2026-09-28",
+    "status": "Shipped",
+    "total": 150,
+    "items": [
+      {
+        "product_id": 1,
+        "quantity": 1,
+        "price": 120
+      },
+      {
+        "product_id": 8,
+        "quantity": 1,
+        "price": 30
+      }
+    ]
+  },
+  {
+    "order_id": "20261001",
+    "customer_id": "C001",
+    "date": "2026-10-01",
+    "status": "Processing",
+    "total": 80,
+    "items": [
+      {
+        "product_id": 3,
+        "quantity": 1,
+        "price": 80
+      }
+    ]
+  },
+  {
+    "order_id": "O002",
+    "customer_id": "C002",
+    "date": "2026-09-29",
+    "status": "Delivered",
+    "total": 80,
+    "items": [
+      {
+        "product_id": 3,
+        "quantity": 1,
+        "price": 80
+      }
+    ]
+  }
+]

@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "product_id": 1,
+    "name": "Nike Running Shoes",
+    "category": "shoes",
+    "color": "black",
+    "price": 120,
+    "stock": 10,
+    "description": "Black shoes for everyday use.",
+    "image": "images/p01.png"
+  },
+  {
+    "id": 2,
+    "product_id": 2,
+    "name": "Adidas Running Shoes",
+    "category": "shoes",
+    "color": "white",
+    "price": 100,
+    "stock": 15,
+    "description": "White shoes for everyday use.",
+    "image": "images/p02.png"
+  },
+  {
+    "id": 3,
+    "product_id": 3,
+    "name": "Black Leather Bag",
+    "category": "bag",
+    "color": "black",
+    "price": 80,
+    "stock": 20,
+    "description": "Black bag for everyday use.",
+    "image": "images/p03.png"
+  },
+  {
+    "id": 4,
+    "product_id": 4,
+    "name": "Blue Sports Shoes",
+    "category": "shoes",
+    "color": "blue",
+    "price": 75,
+    "stock": 12,
+    "description": "Blue shoes for everyday use.",
+    "image": "images/p04.png"
+  },
+  {
+    "id": 5,
+    "product_id": 5,
+    "name": "Nike Budget Shoes",
+    "category": "shoes",
+    "color": "black",
+    "price": 90,
+    "stock": 8,
+    "description": "Black shoes for everyday use.",
+    "image": "images/p05.png"
+  },
+  {
+    "id": 6,
+    "product_id": 6,
+    "name": "Red Trail Shoes",
+    "category": "shoes",
+    "color": "red",
+    "price": 95,
+    "stock": 7,
+    "description": "Red shoes for everyday use.",
+    "image": "images/p06.png"
+  },
+  {
+    "id": 7,
+    "product_id": 7,
+    "name": "White Cotton Shirt",
+    "category": "shirt",
+    "color": "white",
+    "price": 25,
+    "stock": 30,
+    "description": "White shirt for everyday use.",
+    "image": "images/p07.png"
+  },
+  {
+    "id": 8,
+    "product_id": 8,
+    "name": "Blue Cotton Shirt",
+    "category": "shirt",
+    "color": "blue",
+    "price": 30,
+    "stock": 22,
+    "description": "Blue shirt for everyday use.",
+    "image": "images/p08.png"
+  },
+  {
+    "id": 9,
+    "product_id": 9,
+    "name": "Red Travel Bag",
+    "category": "bag",
+    "color": "red",
+    "price": 65,
+    "stock": 6,
+    "description": "Red bag for everyday use.",
+    "image": "images/p09.png"
+  },
+  {
+    "id": 10,
+    "product_id": 10,
+    "name": "Brown Leather Bag",
+    "category": "bag",
+    "color": "brown",
+    "price": 110,
+    "stock": 9,
+    "description": "Brown bag for everyday use.",
+    "image": "images/p10.png"
+  },
+  {
+    "id": 11,
+    "product_id": 11,
+    "name": "Black Sports Shirt",
+    "category": "shirt",
+    "color": "black",
+    "price": 35,
+    "stock": 0,
+    "description": "Black shirt for everyday use.",
+    "image": "images/p11.png"
+  },
+  {
+    "id": 12,
+    "product_id": 12,
+    "name": "Green Walking Shoes",
+    "category": "shoes",
+    "color": "green",
+    "price": 60,
+    "stock": 14,
+    "description": "Green shoes for everyday use.",
+    "image": "images/p12.png"
+  }
+]
