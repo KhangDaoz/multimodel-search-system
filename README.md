@@ -1,31 +1,31 @@
-# Hệ thống tìm kiếm đa phương thức cho thương mại điện tử
+# Multimodal Search System for E-Commerce
 
-Prototype của Assignment 06 hỗ trợ tìm sản phẩm bằng **văn bản, giọng nói mô phỏng và hình ảnh**, đồng thời tra cứu đơn hàng theo khách hàng. Có hai cách sử dụng: giao diện Web trên trình duyệt và dòng lệnh (CLI).
+This Assignment 06 prototype lets users search for products using **text, simulated voice, or images**. It also supports order lookup by customer ID. You can use it in a web browser or from the command line (CLI).
 
-Dự án chạy cục bộ với dữ liệu JSON và ảnh mẫu đi kèm. Không cần API key, máy chủ cơ sở dữ liệu, micro hoặc tải mô hình AI. Sau khi cài đặt các thư viện, giao diện Web có thể hoạt động ngoại tuyến.
+The program runs locally with the included JSON data and sample images. It needs no API key, database server, microphone, or AI model download. After installing the Python packages, you can use it offline.
 
-## 1. Phiên bản Python và thư viện cần thiết
+## 1. Python Version and Required Packages
 
-Sử dụng **Python 3.10 trở lên**. Kiểm tra phiên bản trước khi cài đặt:
+Use **Python 3.10 or later**. Check your version:
 
 ```bash
 python --version
 ```
 
-Nếu máy sử dụng lệnh `python3`, thay `python` bằng `python3` trong các hướng dẫn bên dưới.
+If your computer uses `python3`, replace `python` with `python3` in the commands below.
 
-Các thư viện ngoài được khai báo trong `requirements.txt`:
+The required packages are listed in `requirements.txt`:
 
-| Thư viện | Phiên bản | Mục đích |
+| Package | Version | Purpose |
 |---|---|---|
-| NumPy | `>=2.0,<3` | Xử lý vector ảnh và tính độ tương đồng cosine |
-| Pillow | `>=10,<13` | Đọc ảnh, chuyển RGB và thay đổi kích thước |
+| NumPy | `>=2.0,<3` | Work with image vectors and calculate cosine similarity |
+| Pillow | `>=10,<13` | Open images, convert them to RGB, and resize them |
 
-Máy chủ HTTP, xử lý JSON, tham số dòng lệnh và kiểm thử sử dụng thư viện chuẩn Python. Bootstrap, CSS, JavaScript và ảnh trang Web được lưu sẵn trong `presentation/static/`.
+The web server, JSON handling, command-line options, and tests use Python's standard library. Bootstrap, CSS, JavaScript, and website images are included in `presentation/static/`.
 
-## 2. Cài đặt
+## 2. Installation
 
-Mở terminal tại thư mục gốc dự án, nơi chứa `main.py` và `requirements.txt`.
+Open a terminal in the project root folder, which contains `main.py` and `requirements.txt`.
 
 ### Linux / macOS
 
@@ -43,179 +43,179 @@ python -m venv .venv
 python -m pip install -r requirements.txt
 ```
 
-Nếu sử dụng Command Prompt (cmd), kích hoạt môi trường bằng `.venv\Scripts\activate.bat`.
+In Windows Command Prompt (cmd), activate the environment with `.venv\Scripts\activate.bat`.
 
-Việc cài thư viện cần Internet nếu máy chưa có các gói cần thiết. Những lần chạy sau chỉ cần kích hoạt lại môi trường ảo.
+Installing packages normally requires an Internet connection. For later runs, activate the virtual environment again; you do not need to reinstall the packages.
 
-## 3. Chạy chương trình
+## 3. How to Run the Program
 
-### Giao diện Web (mặc định)
+### Web Interface (Default)
 
 ```bash
 python main.py
 ```
 
-Mở **http://127.0.0.1:8000** trong trình duyệt. Chương trình in địa chỉ truy cập ra terminal; dừng máy chủ bằng **Ctrl+C**.
+Open **http://127.0.0.1:8000** in your browser. The terminal also shows the address. Press **Ctrl+C** in that terminal to stop the server.
 
-Có thể chỉ định chế độ Web và đổi cổng nếu cổng 8000 đang được sử dụng:
+If you get `OSError: [Errno 98] Address already in use`, another program is using the port. Stop the previous server with Ctrl+C, or choose a different port:
 
 ```bash
 python main.py --web --port 8080
 ```
 
-Sau đó mở **http://127.0.0.1:8080**.
+Then open **http://127.0.0.1:8080**.
 
-Cách sử dụng:
+To search in the browser:
 
-1. Chọn **Text**, **Voice** hoặc **Image**.
-2. Với Text/Voice, nhập truy vấn tiếng Anh. Voice nhận văn bản đã phiên âm, không nhận bản ghi âm.
-3. Với Image, chọn ảnh từ máy (giao diện giới hạn tệp tối đa 5 MB). Có thể thử `data/images/p01.png`.
-4. Chọn mã khách hàng và số lượng kết quả, rồi nhấn **Search collection**.
-5. Xem thông tin sản phẩm, giá, tồn kho, điểm tìm kiếm và **View details**. Có thể sắp xếp kết quả theo giá hoặc chọn **View all products** để xem lại danh mục.
+1. Choose **Text**, **Voice**, or **Image**.
+2. For Text or Voice, enter an English query. Voice uses a typed transcript instead of an audio recording.
+3. For Image, upload an image from your computer. The page allows files up to 5 MB. Try `data/images/p01.png`.
+4. Choose a customer ID and a result limit, then click **Search collection**.
+5. View product names, prices, stock, and search scores. Click **View details** for more information. You can sort the shown results by price or use **View all products** to return to the full catalog.
 
-Danh mục ban đầu có 12 sản phẩm. Tra cứu đơn hàng dùng mã khách hàng đang chọn: `O001` thuộc `C001`, còn `O002` thuộc `C002`.
+The catalog contains 12 products. Order lookup uses the selected customer ID: order `O001` belongs to `C001`, and order `O002` belongs to `C002`.
 
-### Giao diện dòng lệnh (CLI)
+### Command-Line Interface (CLI)
 
-Chạy bộ ví dụ mặc định gồm tìm kiếm văn bản, giọng nói mô phỏng, ảnh và đơn hàng:
+Run the default examples for text, simulated voice, images, and orders:
 
 ```bash
 python main.py --cli
 ```
 
-Chạy một truy vấn cụ thể bằng `--mode` và `--query`. Khi có `--mode` hoặc `--json`, chương trình tự chọn CLI nếu không chỉ định `--web`.
+For a single search, use `--mode` and `--query`. Using `--mode` or `--json` selects CLI mode unless you also specify `--web`.
 
-| Tham số | Ý nghĩa | Mặc định |
+| Option | Meaning | Default |
 |---|---|---|
-| `--web` | Khởi động giao diện Web | Được chọn khi không có tham số CLI |
-| `--cli` | Chạy bộ ví dụ CLI | Không |
-| `--port` | Cổng máy chủ Web | `8000` |
-| `--mode` | Loại truy vấn: `text`, `voice`, `image` | Không chỉ định |
-| `--query` | Văn bản truy vấn hoặc đường dẫn ảnh; bắt buộc khi có `--mode` | Không chỉ định |
-| `--customer` | Mã khách hàng để tra cứu đơn hàng | `C001` |
-| `--top-k` | Số kết quả sản phẩm tối đa; phải là số nguyên dương | `5` |
-| `--json` | Xuất kết quả CLI dưới dạng JSON | Không |
+| `--web` | Start the web interface | Used when no CLI option is given |
+| `--cli` | Run the default CLI examples | Off |
+| `--port` | Set the web server port | `8000` |
+| `--mode` | Search type: `text`, `voice`, or `image` | Not set |
+| `--query` | Query text or image path; required with `--mode` | Not set |
+| `--customer` | Customer ID for order lookup | `C001` |
+| `--top-k` | Maximum number of product results; must be a positive integer | `5` |
+| `--json` | Print CLI results as JSON | Off |
 
-`--web` và `--cli` không được dùng đồng thời. Giao diện Web cho phép chọn từ 1 đến 12 kết quả; CLI nhận mọi giá trị `--top-k` nguyên dương.
+You cannot use `--web` and `--cli` together. The web interface allows 1 to 12 results. The CLI accepts any positive integer for `--top-k`.
 
-## 4. Các lệnh ví dụ
+## 4. Example Commands
 
-Chạy các lệnh từ thư mục gốc dự án.
+Run these commands from the project root folder.
 
 ```bash
-# Xem hướng dẫn tham số
+# Show all command-line options
 python main.py --help
 
-# Tìm sản phẩm theo từ khóa
+# Search by keywords
 python main.py --mode text --query "black shoes"
 
-# Tìm giày Nike giá dưới 100, lấy tối đa 3 kết quả
+# Search for Nike shoes under $100 and return up to 3 results
 python main.py --mode text --query "find Nike shoes under 100 dollars" --top-k 3
 
-# Giọng nói mô phỏng: đầu vào là bản phiên âm dạng văn bản
+# Simulate voice input using a typed transcript
 python main.py --mode voice --query "find running shoes"
 
-# Tìm bằng ảnh mẫu
+# Search using a sample product image
 python main.py --mode image --query data/images/p01.png
 
-# Tìm bằng ảnh truy vấn riêng, không nằm trong danh mục sản phẩm
+# Search using a separate image that is not in the product catalog
 python main.py --mode image --query data/images/query_blue_shoe.png --top-k 3
 
-# Tra cứu đơn hàng của khách hàng C001
+# Look up an order for customer C001
 python main.py --mode text --query "find order O001" --customer C001
 
-# Tra cứu đơn hàng của khách hàng C002
+# Look up an order for customer C002
 python main.py --mode text --query "find order O002" --customer C002
 
-# Tra cứu đơn hàng gần nhất của khách hàng mặc định C001
+# Find the latest order for the default customer, C001
 python main.py --mode voice --query "where is my latest order"
 
-# Xuất kết quả một truy vấn thành JSON
+# Print one search result as JSON
 python main.py --mode text --query "blue shoes" --json
 
-# Xuất toàn bộ bộ ví dụ mặc định thành JSON
+# Print all default examples as JSON
 python main.py --json
 ```
 
-Đường dẫn ảnh truy vấn tương đối được tính từ thư mục terminal hiện tại. Nếu ảnh nằm ở nơi khác, dùng đường dẫn tuyệt đối và đặt trong dấu ngoặc kép nếu có khoảng trắng. Dữ liệu danh mục được nạp theo vị trí module của dự án.
+Relative image paths start from your terminal's current folder. For an image elsewhere, use an absolute path. Put the path in quotes if it contains spaces. The program loads catalog data from its own module folder.
 
-Bộ lọc `under`/`below` là giới hạn giá **nhỏ hơn** giá đã nhập, không bao gồm giá bằng giới hạn. Truy vấn đơn hàng của khách hàng khác sẽ không trả về thông tin đơn hàng đó.
+The `under` and `below` price filters mean **less than** the given price. Products with exactly that price are excluded. An order lookup does not return an order owned by another customer.
 
-## 5. Cấu trúc thư mục
+## 5. Project Directory Structure
 
 ```text
 multimodel-search-system/
 ├── README.md
-├── requirements.txt               # Các thư viện Python cần cài
-├── main.py                        # Khởi tạo dịch vụ, chạy Web hoặc CLI
-├── evaluate.py                    # Đánh giá với 17 trường hợp cố định
-├── application/                   # Xử lý nghiệp vụ
-│   ├── query_service.py           # Chuẩn hóa truy vấn, nhận diện ý định, lọc giá
-│   ├── speech_service.py          # Mô phỏng chuyển giọng nói thành văn bản
-│   ├── image_service.py           # Chuyển ảnh thành vector đặc trưng
-│   ├── search_service.py          # Tìm sản phẩm và tra cứu đơn hàng
-│   └── ranking_service.py         # Xếp hạng và chọn top-k
-├── data/                          # Dữ liệu và lớp truy cập dữ liệu
-│   ├── products.json              # Danh mục 12 sản phẩm
-│   ├── orders.json                # Đơn hàng mẫu
-│   ├── product_repository.py      # Đọc sản phẩm và ảnh
-│   ├── order_repository.py        # Đọc đơn hàng theo khách hàng
-│   ├── vector_index.py            # Chỉ mục vector trong bộ nhớ
-│   └── images/                    # 12 ảnh sản phẩm và một ảnh truy vấn riêng
-├── presentation/                  # Giao diện người dùng
-│   ├── search_ui.py               # Tiếp nhận đầu vào và trình bày kết quả CLI
-│   ├── web_server.py              # Máy chủ HTTP cục bộ
-│   ├── web_ui.html                # Giao diện Web
-│   ├── demo_window.py             # Cửa sổ xem kết quả demo CLI (tùy chọn)
-│   └── static/                    # CSS, JavaScript, Bootstrap và ảnh giao diện
-│       └── ASSETS.md              # Nguồn và giấy phép tài nguyên
+├── requirements.txt               # Required Python packages
+├── main.py                        # Set up services and start Web or CLI
+├── evaluate.py                    # Run 17 fixed evaluation cases
+├── application/                   # Search logic
+│   ├── query_service.py           # Process queries and read price filters
+│   ├── speech_service.py          # Simulate speech transcription
+│   ├── image_service.py           # Convert images into feature vectors
+│   ├── search_service.py          # Search products and look up orders
+│   └── ranking_service.py         # Rank results and select top-k
+├── data/                          # Sample data and data access
+│   ├── products.json              # Catalog of 12 products
+│   ├── orders.json                # Sample orders
+│   ├── product_repository.py      # Read products and their images
+│   ├── order_repository.py        # Read orders by customer
+│   ├── vector_index.py            # Image vector index stored in memory
+│   └── images/                    # 12 product images and a separate query image
+├── presentation/                  # User interfaces
+│   ├── search_ui.py               # Handle input and display CLI results
+│   ├── web_server.py              # Local HTTP server
+│   ├── web_ui.html                # Web page
+│   ├── demo_window.py             # Optional window showing CLI demo output
+│   └── static/                    # CSS, JavaScript, Bootstrap, and website images
+│       └── ASSETS.md              # Asset sources and licenses
 ├── tests/
-│   ├── test_search.py             # Kiểm thử tìm kiếm
-│   └── test_web.py                # Kiểm thử giao diện HTTP
+│   ├── test_search.py             # Search tests
+│   └── test_web.py                # HTTP interface tests
 └── uml/
-    ├── Assignment06.vpp           # Dự án UML của Visual Paradigm
-    └── README.md                  # Hướng dẫn mở mô hình UML
+    ├── Assignment06.vpp           # Visual Paradigm UML project
+    └── README.md                  # Instructions for opening the UML model
 ```
 
-Luồng xử lý chính: **giao diện → chuẩn hóa văn bản / mô phỏng phiên âm / trích xuất đặc trưng ảnh → tìm kiếm → xếp hạng → hiển thị kết quả**. Dữ liệu lưu bằng JSON; chỉ mục ảnh được tạo lại trong bộ nhớ khi khởi động.
+The main flow is: **user input → process text or image → search → rank → display results**. Data is stored in JSON files. The image index is built in memory each time the program starts.
 
-## 6. Kiểm thử và đánh giá
+## 6. Tests and Evaluation
 
-Chạy bộ kiểm thử:
+Run the tests:
 
 ```bash
 python -m unittest discover -s tests -v
 ```
 
-Chạy đánh giá 17 trường hợp truy vấn cố định:
+Run the 17 fixed evaluation cases:
 
 ```bash
 python evaluate.py
 ```
 
-Lệnh đánh giá in kết quả ra terminal và tạo thư mục `results/` với hai tệp:
+The evaluation prints results in the terminal and creates a `results/` folder with:
 
-- `results/evaluation.json`: đầu vào, kết quả kỳ vọng/thực tế, trạng thái đạt và thời gian xử lý.
-- `results/evaluation.md`: bảng kết quả và tỷ lệ đạt.
+- `results/evaluation.json`: inputs, expected and actual results, pass/fail status, and processing time.
+- `results/evaluation.md`: a results table and the pass rate.
 
-Tiêu chí đánh giá là ID sản phẩm/đơn hàng ở vị trí đầu tiên, hoặc không có kết quả. Bộ đánh giá có các trường hợp cố ý kiểm tra giới hạn của prototype; không nên hiểu tỷ lệ đạt là độ chính xác trên ảnh sản phẩm thực tế.
+Each case checks the first product or order ID, or checks that there is no result. Some cases are designed to show the prototype's limits. The pass rate does not measure accuracy on real product photos.
 
-Cửa sổ xem demo tùy chọn:
+To open the optional CLI demo viewer:
 
 ```bash
 python presentation/demo_window.py
 ```
 
-Cửa sổ này cần **Tkinter**. Một số bản phân phối Linux cung cấp Tkinter qua gói hệ điều hành `python3-tk`; Web, CLI và đánh giá không cần Tkinter.
+This viewer needs **Tkinter**. Some Linux distributions provide it through the `python3-tk` system package. The Web, CLI, and evaluation do not need Tkinter.
 
-## 7. Giới hạn của prototype
+## 7. Prototype Limitations
 
-- **Giọng nói chỉ được mô phỏng:** người dùng nhập bản phiên âm. Chưa có ghi âm từ micro, đọc tệp âm thanh hoặc nhận dạng tiếng nói thực tế.
-- **Tìm kiếm văn bản dựa trên từ khóa:** đếm các token trùng khớp trong thông tin sản phẩm. Bộ xử lý thiết kế cho truy vấn tiếng Anh, chưa hỗ trợ hiểu ngữ nghĩa, từ đồng nghĩa hoặc tiếng Việt. Ví dụ `dark sneakers` có thể không tìm được sản phẩm phù hợp như `black shoes`.
-- **Đặc trưng ảnh đơn giản:** ảnh được chuyển RGB, thu nhỏ xuống 16 × 16 và lấy vùng giữa 11 × 11, tạo vector 363 chiều. Đây là đặc trưng pixel thủ công, chưa sử dụng mô hình học sâu; thay đổi màu, góc chụp hoặc nền có thể ảnh hưởng kết quả.
-- **Ảnh giống nhau khó phân biệt:** ảnh mẫu là các hình tổng hợp đơn giản; sản phẩm khác nhau có thể có ảnh giống hệt. Khi điểm bằng nhau, hệ thống ưu tiên ID sản phẩm nhỏ hơn.
-- **Không có ngưỡng từ chối ảnh:** tìm kiếm ảnh trả về các hàng xóm gần nhất theo top-k, kể cả khi ảnh không liên quan đến danh mục. Điểm tương đồng không phải xác suất sản phẩm đúng.
-- **Bộ lọc và xếp hạng còn hạn chế:** hỗ trợ giá tối đa qua `under`/`below`, nhưng chưa suy luận sở thích hay ngân sách không được nêu trong truy vấn. Sắp xếp giá trên Web chỉ sắp xếp các kết quả đã hiển thị.
-- **Dữ liệu và đánh giá nhỏ:** chỉ có 12 sản phẩm mẫu. Bộ đánh giá có cả ảnh truy vấn trùng ảnh trong danh mục và một ảnh biến đổi; chưa chứng minh khả năng tổng quát trên dữ liệu thực tế.
-- **Chưa có xác thực người dùng:** `--customer` và bộ chọn khách hàng là tham số mô phỏng danh tính. Việc kiểm tra chủ đơn hàng không thay thế cơ chế đăng nhập và phân quyền thực tế.
-- **Hạ tầng dành cho demo cục bộ:** dùng tệp JSON và chỉ mục trong RAM, chưa có cơ sở dữ liệu sản xuất hoặc chỉ mục vector quy mô lớn. Máy chủ chỉ lắng nghe tại `127.0.0.1`; prototype chưa cung cấp quy trình đặt hàng, thanh toán hay quản trị sản phẩm.
+- **Voice input is simulated.** Users type a transcript. The program does not record a microphone, read audio files, or perform real speech recognition.
+- **Text search matches keywords.** It counts matching words in product information. It is designed for English queries and does not understand synonyms, meaning, or Vietnamese queries. For example, `dark sneakers` may not find the same products as `black shoes`.
+- **Image search uses simple pixel features.** Images are converted to RGB and resized to 16 × 16 pixels. An 11 × 11 center area produces a vector of 363 values. There is no deep learning model. Changes in color, camera angle, or background can affect results.
+- **Identical images can give incorrect product matches.** The sample images are simple generated shapes. Different products may use identical images. When scores are equal, the smaller product ID comes first.
+- **Image search has no minimum similarity score.** It returns the closest top-k images even when the query image is unrelated to the catalog. A similarity score is not a probability that the match is correct.
+- **Filters and ranking are basic.** The program supports maximum prices through `under` or `below`. It does not infer preferences or a budget that the user has not stated. Price sorting on the web page only sorts the results already shown.
+- **The dataset and evaluation are small.** There are only 12 sample products. Evaluation includes catalog images and one changed image, so it does not show how well the system works on real-world data.
+- **There is no user authentication.** The customer option is a test identity value. Checking order ownership does not replace a real login and access control system.
+- **The system is for local demonstrations.** It uses JSON files and an in-memory index rather than a production database or a large vector index. The server listens only on `127.0.0.1`. Checkout, payments, and product management are not included.
