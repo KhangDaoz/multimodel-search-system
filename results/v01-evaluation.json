@@ -1,0 +1,162 @@
+{
+  "total": 17,
+  "successful": 14,
+  "success_rate": 0.8235294117647058,
+  "criterion": "Expected top-1 product/order ID, or no result. Cases fixed before running.",
+  "scope": "Small synthetic dataset; includes self-image sanity checks, one perturbed query, and limitation probes. Not a generalization benchmark.",
+  "cases": [
+    {
+      "mode": "text",
+      "input": "black shoes",
+      "expected": 1,
+      "actual": 1,
+      "success": true,
+      "note": "Exact two-token relevance; ID tie break",
+      "latency_ms": 0.422
+    },
+    {
+      "mode": "voice",
+      "input": "find running shoes",
+      "expected": 1,
+      "actual": 1,
+      "success": true,
+      "note": "Nike/Adidas tie resolved by ID",
+      "latency_ms": 0.111
+    },
+    {
+      "mode": "text",
+      "input": "find Nike shoes under 100 dollars",
+      "expected": 5,
+      "actual": 5,
+      "success": true,
+      "note": "Strict price filter",
+      "latency_ms": 0.089
+    },
+    {
+      "mode": "text",
+      "input": "blue shoes",
+      "expected": 4,
+      "actual": 4,
+      "success": true,
+      "note": "Color and category",
+      "latency_ms": 0.093
+    },
+    {
+      "mode": "text",
+      "input": "red bag",
+      "expected": 9,
+      "actual": 9,
+      "success": true,
+      "note": "Color and category",
+      "latency_ms": 0.087
+    },
+    {
+      "mode": "text",
+      "input": "white shirt",
+      "expected": 7,
+      "actual": 7,
+      "success": true,
+      "note": "Color and category",
+      "latency_ms": 0.087
+    },
+    {
+      "mode": "text",
+      "input": "spaceship",
+      "expected": null,
+      "actual": null,
+      "success": true,
+      "note": "Unknown keyword produces no result",
+      "latency_ms": 0.082
+    },
+    {
+      "mode": "text",
+      "input": "",
+      "expected": null,
+      "actual": null,
+      "success": true,
+      "note": "Empty query produces no result",
+      "latency_ms": 0.081
+    },
+    {
+      "mode": "text",
+      "input": "find order O001",
+      "expected": "O001",
+      "actual": "O001",
+      "success": true,
+      "note": "Order owner C001",
+      "latency_ms": 0.134
+    },
+    {
+      "mode": "voice",
+      "input": "where is my latest order",
+      "expected": "20261001",
+      "actual": "20261001",
+      "success": true,
+      "note": "Latest date for C001",
+      "latency_ms": 0.023
+    },
+    {
+      "mode": "text",
+      "input": "find order O002",
+      "expected": null,
+      "actual": null,
+      "success": true,
+      "note": "Other customer order excluded",
+      "latency_ms": 0.036
+    },
+    {
+      "mode": "image",
+      "input": "data/images/p01.png",
+      "expected": 1,
+      "actual": 1,
+      "success": true,
+      "note": "Self-image sanity check",
+      "latency_ms": 1.754
+    },
+    {
+      "mode": "image",
+      "input": "data/images/p04.png",
+      "expected": 4,
+      "actual": 4,
+      "success": true,
+      "note": "Self-image sanity check",
+      "latency_ms": 1.666
+    },
+    {
+      "mode": "image",
+      "input": "data/images/query_blue_shoe.png",
+      "expected": 4,
+      "actual": 4,
+      "success": true,
+      "note": "Perturbed image, held out from index",
+      "latency_ms": 1.651
+    },
+    {
+      "mode": "text",
+      "input": "dark sneakers",
+      "expected": 1,
+      "actual": null,
+      "success": false,
+      "note": "Semantic synonym expectation: baseline cannot satisfy",
+      "latency_ms": 0.109
+    },
+    {
+      "mode": "text",
+      "input": "black shoes",
+      "expected": 5,
+      "actual": 1,
+      "success": false,
+      "note": "Budget preference unstated in query: baseline ignores price ranking",
+      "latency_ms": 0.095
+    },
+    {
+      "mode": "image",
+      "input": "data/images/p05.png",
+      "expected": 5,
+      "actual": 1,
+      "success": false,
+      "note": "Identical images cannot distinguish product identities",
+      "latency_ms": 1.647
+    }
+  ]
+}

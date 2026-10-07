@@ -1,0 +1,9 @@
+
+INPUT [audio]: tests/fixtures/blue_shoes.wav
+PROCESSING: real audio → Vosk offline speech-to-text -> normalize/tokenize -> keyword retrieval -> category/price/stock filters -> rank candidates -> top-k
+QUERY REPRESENTATION: i m blue shoes
+ 3 | Puma Future Rider Trainers | $ 89.99 | score=0.500000
+ 1 | Nike Air Jordan 1 Red And Black | $149.99 | score=0.250000
+ 2 | Nike Baseball Cleats     | $ 79.99 | score=0.250000
+ 4 | Sports Sneakers Off White & Red | $119.99 | score=0.250000
+ 5 | Sports Sneakers Off White Red | $109.99 | score=0.250000

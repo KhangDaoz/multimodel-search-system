@@ -1,0 +1,700 @@
+[
+  {
+    "query": {
+      "type": "text",
+      "intent": "product",
+      "query": "black shoes",
+      "tokens": [
+        "black",
+        "shoes"
+      ],
+      "embedding": null,
+      "filters": {
+        "category": null,
+        "min_price": null,
+        "max_price": null,
+        "in_stock": false
+      },
+      "customer_id": "C001",
+      "text_weight": 1.0
+    },
+    "processing": [
+      "normalize/tokenize",
+      "keyword retrieval",
+      "category/price/stock filters",
+      "rank candidates",
+      "top-k"
+    ],
+    "candidate_count": 7,
+    "results": [
+      {
+        "product": {
+          "id": 1,
+          "product_id": 1,
+          "name": "Nike Air Jordan 1 Red And Black",
+          "brand": "Nike",
+          "category": "shoes",
+          "color": "red black",
+          "price": 149.99,
+          "stock": 7,
+          "description": "The Nike Air Jordan 1 in Red and Black is an iconic basketball sneaker known for its stylish design and high-performance features, making it a favorite among sneaker enthusiasts and athletes.",
+          "image": "images/p01.png",
+          "rating": 4.77,
+          "reviews_count": 3,
+          "discount": 4.12,
+          "source_id": 88,
+          "image_source": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships in 1 week",
+          "returns": "No return policy"
+        },
+        "score": 1.0
+      },
+      {
+        "product": {
+          "id": 2,
+          "product_id": 2,
+          "name": "Nike Baseball Cleats",
+          "brand": "Nike",
+          "category": "shoes",
+          "color": "green white",
+          "price": 79.99,
+          "stock": 12,
+          "description": "Nike Baseball Cleats are designed for maximum traction and performance on the baseball field. They provide stability and support for players during games and practices.",
+          "image": "images/p02.png",
+          "rating": 3.88,
+          "reviews_count": 3,
+          "discount": 18.04,
+          "source_id": 89,
+          "image_source": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships in 2 weeks",
+          "returns": "No return policy"
+        },
+        "score": 0.5
+      },
+      {
+        "product": {
+          "id": 3,
+          "product_id": 3,
+          "name": "Puma Future Rider Trainers",
+          "brand": "Puma",
+          "category": "shoes",
+          "color": "blue yellow white",
+          "price": 89.99,
+          "stock": 90,
+          "description": "The Puma Future Rider Trainers offer a blend of retro style and modern comfort. Perfect for casual wear, these trainers provide a fashionable and comfortable option for everyday use.",
+          "image": "images/p03.png",
+          "rating": 4.9,
+          "reviews_count": 3,
+          "discount": 4.2,
+          "source_id": 90,
+          "image_source": "https://cdn.dummyjson.com/product-images/mens-shoes/puma-future-rider-trainers/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships in 1-2 business days",
+          "returns": "90 days return policy"
+        },
+        "score": 0.5
+      },
+      {
+        "product": {
+          "id": 4,
+          "product_id": 4,
+          "name": "Sports Sneakers Off White & Red",
+          "brand": "Off White",
+          "category": "shoes",
+          "color": "white red",
+          "price": 119.99,
+          "stock": 17,
+          "description": "The Sports Sneakers in Off White and Red combine style and functionality, making them a fashionable choice for sports enthusiasts. The red and off-white color combination adds a bold and energetic touch.",
+          "image": "images/p04.png",
+          "rating": 4.77,
+          "reviews_count": 3,
+          "discount": 4.97,
+          "source_id": 91,
+          "image_source": "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-&-red/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships in 3-5 business days",
+          "returns": "30 days return policy"
+        },
+        "score": 0.5
+      },
+      {
+        "product": {
+          "id": 5,
+          "product_id": 5,
+          "name": "Sports Sneakers Off White Red",
+          "brand": "Off White",
+          "category": "shoes",
+          "color": "white red",
+          "price": 109.99,
+          "stock": 62,
+          "description": "Another variant of the Sports Sneakers in Off White Red, featuring a unique design. These sneakers offer style and comfort for casual occasions.",
+          "image": "images/p05.png",
+          "rating": 4.69,
+          "reviews_count": 3,
+          "discount": 0.04,
+          "source_id": 92,
+          "image_source": "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships overnight",
+          "returns": "60 days return policy"
+        },
+        "score": 0.5
+      }
+    ],
+    "order": null,
+    "input": {
+      "mode": "text",
+      "input": "black shoes",
+      "expected": 1,
+      "note": "Color/category relevance"
+    }
+  },
+  {
+    "query": {
+      "type": "voice",
+      "intent": "product",
+      "query": "i m blue shoes",
+      "tokens": [
+        "i",
+        "m",
+        "blue",
+        "shoes"
+      ],
+      "embedding": null,
+      "filters": {
+        "category": null,
+        "min_price": null,
+        "max_price": null,
+        "in_stock": false
+      },
+      "customer_id": "C001",
+      "text_weight": 1.0
+    },
+    "processing": [
+      "real audio \u2192 Vosk offline speech-to-text",
+      "normalize/tokenize",
+      "keyword retrieval",
+      "category/price/stock filters",
+      "rank candidates",
+      "top-k"
+    ],
+    "candidate_count": 10,
+    "results": [
+      {
+        "product": {
+          "id": 3,
+          "product_id": 3,
+          "name": "Puma Future Rider Trainers",
+          "brand": "Puma",
+          "category": "shoes",
+          "color": "blue yellow white",
+          "price": 89.99,
+          "stock": 90,
+          "description": "The Puma Future Rider Trainers offer a blend of retro style and modern comfort. Perfect for casual wear, these trainers provide a fashionable and comfortable option for everyday use.",
+          "image": "images/p03.png",
+          "rating": 4.9,
+          "reviews_count": 3,
+          "discount": 4.2,
+          "source_id": 90,
+          "image_source": "https://cdn.dummyjson.com/product-images/mens-shoes/puma-future-rider-trainers/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships in 1-2 business days",
+          "returns": "90 days return policy"
+        },
+        "score": 0.5
+      },
+      {
+        "product": {
+          "id": 1,
+          "product_id": 1,
+          "name": "Nike Air Jordan 1 Red And Black",
+          "brand": "Nike",
+          "category": "shoes",
+          "color": "red black",
+          "price": 149.99,
+          "stock": 7,
+          "description": "The Nike Air Jordan 1 in Red and Black is an iconic basketball sneaker known for its stylish design and high-performance features, making it a favorite among sneaker enthusiasts and athletes.",
+          "image": "images/p01.png",
+          "rating": 4.77,
+          "reviews_count": 3,
+          "discount": 4.12,
+          "source_id": 88,
+          "image_source": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships in 1 week",
+          "returns": "No return policy"
+        },
+        "score": 0.25
+      },
+      {
+        "product": {
+          "id": 2,
+          "product_id": 2,
+          "name": "Nike Baseball Cleats",
+          "brand": "Nike",
+          "category": "shoes",
+          "color": "green white",
+          "price": 79.99,
+          "stock": 12,
+          "description": "Nike Baseball Cleats are designed for maximum traction and performance on the baseball field. They provide stability and support for players during games and practices.",
+          "image": "images/p02.png",
+          "rating": 3.88,
+          "reviews_count": 3,
+          "discount": 18.04,
+          "source_id": 89,
+          "image_source": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships in 2 weeks",
+          "returns": "No return policy"
+        },
+        "score": 0.25
+      },
+      {
+        "product": {
+          "id": 4,
+          "product_id": 4,
+          "name": "Sports Sneakers Off White & Red",
+          "brand": "Off White",
+          "category": "shoes",
+          "color": "white red",
+          "price": 119.99,
+          "stock": 17,
+          "description": "The Sports Sneakers in Off White and Red combine style and functionality, making them a fashionable choice for sports enthusiasts. The red and off-white color combination adds a bold and energetic touch.",
+          "image": "images/p04.png",
+          "rating": 4.77,
+          "reviews_count": 3,
+          "discount": 4.97,
+          "source_id": 91,
+          "image_source": "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-&-red/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships in 3-5 business days",
+          "returns": "30 days return policy"
+        },
+        "score": 0.25
+      },
+      {
+        "product": {
+          "id": 5,
+          "product_id": 5,
+          "name": "Sports Sneakers Off White Red",
+          "brand": "Off White",
+          "category": "shoes",
+          "color": "white red",
+          "price": 109.99,
+          "stock": 62,
+          "description": "Another variant of the Sports Sneakers in Off White Red, featuring a unique design. These sneakers offer style and comfort for casual occasions.",
+          "image": "images/p05.png",
+          "rating": 4.69,
+          "reviews_count": 3,
+          "discount": 0.04,
+          "source_id": 92,
+          "image_source": "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships overnight",
+          "returns": "60 days return policy"
+        },
+        "score": 0.25
+      }
+    ],
+    "order": null,
+    "speech": {
+      "text": "i'm blue shoes",
+      "engine": "Vosk offline",
+      "language": "en-US",
+      "duration_seconds": 1.69,
+      "source": "audio"
+    },
+    "input": {
+      "mode": "audio",
+      "input": "tests/fixtures/blue_shoes.wav",
+      "expected": 3,
+      "note": "Actual WAV decoding; eSpeak synthetic speech fixture"
+    }
+  },
+  {
+    "query": {
+      "type": "image",
+      "intent": "product",
+      "query": "",
+      "tokens": [],
+      "embedding": null,
+      "filters": {
+        "category": null,
+        "min_price": null,
+        "max_price": null,
+        "in_stock": false
+      },
+      "customer_id": "C001",
+      "text_weight": 0.0,
+      "embedding_dimension": 768
+    },
+    "processing": [
+      "encode image",
+      "cosine retrieval",
+      "category/price/stock filters",
+      "rank candidates",
+      "top-k"
+    ],
+    "candidate_count": 15,
+    "results": [
+      {
+        "product": {
+          "id": 3,
+          "product_id": 3,
+          "name": "Puma Future Rider Trainers",
+          "brand": "Puma",
+          "category": "shoes",
+          "color": "blue yellow white",
+          "price": 89.99,
+          "stock": 90,
+          "description": "The Puma Future Rider Trainers offer a blend of retro style and modern comfort. Perfect for casual wear, these trainers provide a fashionable and comfortable option for everyday use.",
+          "image": "images/p03.png",
+          "rating": 4.9,
+          "reviews_count": 3,
+          "discount": 4.2,
+          "source_id": 90,
+          "image_source": "https://cdn.dummyjson.com/product-images/mens-shoes/puma-future-rider-trainers/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships in 1-2 business days",
+          "returns": "90 days return policy"
+        },
+        "score": 0.839158
+      },
+      {
+        "product": {
+          "id": 2,
+          "product_id": 2,
+          "name": "Nike Baseball Cleats",
+          "brand": "Nike",
+          "category": "shoes",
+          "color": "green white",
+          "price": 79.99,
+          "stock": 12,
+          "description": "Nike Baseball Cleats are designed for maximum traction and performance on the baseball field. They provide stability and support for players during games and practices.",
+          "image": "images/p02.png",
+          "rating": 3.88,
+          "reviews_count": 3,
+          "discount": 18.04,
+          "source_id": 89,
+          "image_source": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships in 2 weeks",
+          "returns": "No return policy"
+        },
+        "score": 0.765792
+      },
+      {
+        "product": {
+          "id": 11,
+          "product_id": 11,
+          "name": "Blue Women's Handbag",
+          "brand": "Fashionista",
+          "category": "bag",
+          "color": "blue",
+          "price": 49.99,
+          "stock": 76,
+          "description": "The Blue Women's Handbag is a stylish and spacious accessory for everyday use. With a vibrant blue color and multiple compartments, it combines fashion and functionality.",
+          "image": "images/p11.png",
+          "rating": 2.92,
+          "reviews_count": 3,
+          "discount": 17.88,
+          "source_id": 172,
+          "image_source": "https://cdn.dummyjson.com/product-images/womens-bags/blue-women's-handbag/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships in 1 week",
+          "returns": "7 days return policy"
+        },
+        "score": 0.698171
+      },
+      {
+        "product": {
+          "id": 15,
+          "product_id": 15,
+          "name": "Women Handbag Black",
+          "brand": "Elegance Collection",
+          "category": "bag",
+          "color": "black",
+          "price": 59.99,
+          "stock": 11,
+          "description": "The Women Handbag in Black is a classic and versatile accessory that complements various outfits. With a timeless black color and functional design, it's a must-have in every woman's wardrobe.",
+          "image": "images/p15.png",
+          "rating": 2.89,
+          "reviews_count": 3,
+          "discount": 11.63,
+          "source_id": 176,
+          "image_source": "https://cdn.dummyjson.com/product-images/womens-bags/women-handbag-black/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships in 1 month",
+          "returns": "60 days return policy"
+        },
+        "score": 0.680553
+      },
+      {
+        "product": {
+          "id": 5,
+          "product_id": 5,
+          "name": "Sports Sneakers Off White Red",
+          "brand": "Off White",
+          "category": "shoes",
+          "color": "white red",
+          "price": 109.99,
+          "stock": 62,
+          "description": "Another variant of the Sports Sneakers in Off White Red, featuring a unique design. These sneakers offer style and comfort for casual occasions.",
+          "image": "images/p05.png",
+          "rating": 4.69,
+          "reviews_count": 3,
+          "discount": 0.04,
+          "source_id": 92,
+          "image_source": "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships overnight",
+          "returns": "60 days return policy"
+        },
+        "score": 0.676656
+      }
+    ],
+    "order": null,
+    "input": {
+      "mode": "image",
+      "input": "data/images/query_blue_trainers.png",
+      "expected": 3,
+      "note": "Resized and rotated query, not indexed"
+    }
+  },
+  {
+    "query": {
+      "type": "multimodal",
+      "intent": "product",
+      "query": "blue shoes",
+      "tokens": [
+        "blue",
+        "shoes"
+      ],
+      "embedding": null,
+      "filters": {
+        "category": null,
+        "min_price": null,
+        "max_price": null,
+        "in_stock": false
+      },
+      "customer_id": "C001",
+      "text_weight": 0.7,
+      "embedding_dimension": 768
+    },
+    "processing": [
+      "normalize/tokenize",
+      "encode image",
+      "text and cosine retrieval",
+      "weighted score fusion",
+      "category/price/stock filters",
+      "rank candidates",
+      "top-k"
+    ],
+    "candidate_count": 15,
+    "results": [
+      {
+        "product": {
+          "id": 3,
+          "product_id": 3,
+          "name": "Puma Future Rider Trainers",
+          "brand": "Puma",
+          "category": "shoes",
+          "color": "blue yellow white",
+          "price": 89.99,
+          "stock": 90,
+          "description": "The Puma Future Rider Trainers offer a blend of retro style and modern comfort. Perfect for casual wear, these trainers provide a fashionable and comfortable option for everyday use.",
+          "image": "images/p03.png",
+          "rating": 4.9,
+          "reviews_count": 3,
+          "discount": 4.2,
+          "source_id": 90,
+          "image_source": "https://cdn.dummyjson.com/product-images/mens-shoes/puma-future-rider-trainers/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships in 1-2 business days",
+          "returns": "90 days return policy"
+        },
+        "score": 1.0,
+        "signals": {
+          "text": 1.0,
+          "image": 1.0,
+          "text_weight": 0.7
+        }
+      },
+      {
+        "product": {
+          "id": 2,
+          "product_id": 2,
+          "name": "Nike Baseball Cleats",
+          "brand": "Nike",
+          "category": "shoes",
+          "color": "green white",
+          "price": 79.99,
+          "stock": 12,
+          "description": "Nike Baseball Cleats are designed for maximum traction and performance on the baseball field. They provide stability and support for players during games and practices.",
+          "image": "images/p02.png",
+          "rating": 3.88,
+          "reviews_count": 3,
+          "discount": 18.04,
+          "source_id": 89,
+          "image_source": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships in 2 weeks",
+          "returns": "No return policy"
+        },
+        "score": 0.615041,
+        "signals": {
+          "text": 0.5,
+          "image": 0.883471,
+          "text_weight": 0.7
+        }
+      },
+      {
+        "product": {
+          "id": 5,
+          "product_id": 5,
+          "name": "Sports Sneakers Off White Red",
+          "brand": "Off White",
+          "category": "shoes",
+          "color": "white red",
+          "price": 109.99,
+          "stock": 62,
+          "description": "Another variant of the Sports Sneakers in Off White Red, featuring a unique design. These sneakers offer style and comfort for casual occasions.",
+          "image": "images/p05.png",
+          "rating": 4.69,
+          "reviews_count": 3,
+          "discount": 0.04,
+          "source_id": 92,
+          "image_source": "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships overnight",
+          "returns": "60 days return policy"
+        },
+        "score": 0.583182,
+        "signals": {
+          "text": 0.5,
+          "image": 0.777273,
+          "text_weight": 0.7
+        }
+      },
+      {
+        "product": {
+          "id": 1,
+          "product_id": 1,
+          "name": "Nike Air Jordan 1 Red And Black",
+          "brand": "Nike",
+          "category": "shoes",
+          "color": "red black",
+          "price": 149.99,
+          "stock": 7,
+          "description": "The Nike Air Jordan 1 in Red and Black is an iconic basketball sneaker known for its stylish design and high-performance features, making it a favorite among sneaker enthusiasts and athletes.",
+          "image": "images/p01.png",
+          "rating": 4.77,
+          "reviews_count": 3,
+          "discount": 4.12,
+          "source_id": 88,
+          "image_source": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships in 1 week",
+          "returns": "No return policy"
+        },
+        "score": 0.56767,
+        "signals": {
+          "text": 0.5,
+          "image": 0.725566,
+          "text_weight": 0.7
+        }
+      },
+      {
+        "product": {
+          "id": 11,
+          "product_id": 11,
+          "name": "Blue Women's Handbag",
+          "brand": "Fashionista",
+          "category": "bag",
+          "color": "blue",
+          "price": 49.99,
+          "stock": 76,
+          "description": "The Blue Women's Handbag is a stylish and spacious accessory for everyday use. With a vibrant blue color and multiple compartments, it combines fashion and functionality.",
+          "image": "images/p11.png",
+          "rating": 2.92,
+          "reviews_count": 3,
+          "discount": 17.88,
+          "source_id": 172,
+          "image_source": "https://cdn.dummyjson.com/product-images/womens-bags/blue-women's-handbag/1.webp",
+          "source": "https://github.com/Ovi/DummyJSON",
+          "shipping": "Ships in 1 week",
+          "returns": "7 days return policy"
+        },
+        "score": 0.566145,
+        "signals": {
+          "text": 0.5,
+          "image": 0.720482,
+          "text_weight": 0.7
+        }
+      }
+    ],
+    "order": null,
+    "input": {
+      "mode": "multimodal",
+      "input": "blue shoes",
+      "image_path": "data/images/p03.png",
+      "text_weight": 0.7,
+      "expected": 3,
+      "note": "Weighted text/image agreement"
+    }
+  },
+  {
+    "query": {
+      "type": "text",
+      "intent": "order",
+      "query": "find order o001",
+      "tokens": [
+        "order",
+        "o001"
+      ],
+      "embedding": null,
+      "filters": {
+        "category": null,
+        "min_price": null,
+        "max_price": null,
+        "in_stock": false
+      },
+      "customer_id": "C001",
+      "text_weight": 1.0
+    },
+    "processing": [
+      "normalize query",
+      "resolve order intent",
+      "check customer ownership",
+      "lookup order"
+    ],
+    "results": [],
+    "order": {
+      "order_id": "O001",
+      "customer_id": "C001",
+      "date": "2026-09-28",
+      "status": "Shipped",
+      "total": 184.98,
+      "items": [
+        {
+          "product_id": 1,
+          "quantity": 1,
+          "price": 149.99
+        },
+        {
+          "product_id": 8,
+          "quantity": 1,
+          "price": 34.99
+        }
+      ]
+    },
+    "input": {
+      "mode": "text",
+      "input": "find order O001",
+      "expected": "O001",
+      "note": "Order owner C001"
+    }
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "passed": 19,
+  "checks": [
+    "15 photographed catalog products",
+    "catalog category and stock filter",
+    "text relevance",
+    "photo/details modal",
+    "add to bag",
+    "shopping bag subtotal",
+    "bag persists across reload",
+    "actual photo upload",
+    "fusion result and contributions",
+    "voice has no typed transcript input",
+    "real uploaded audio recognized",
+    "voice ranks correct photo",
+    "MediaRecorder virtual microphone \u2192 real Vosk recognizer",
+    "microphone tracks released",
+    "empty result state",
+    "latest order",
+    "mobile has no horizontal overflow",
+    "desktop has no horizontal overflow",
+    "no JavaScript exceptions"
+  ],
+  "javascript_errors": [],
+  "microphone_scope": "Chromium virtual device fed by synthetic eSpeak WAV; real MediaRecorder/audio decoding/Vosk run without STT mocks. Human microphone and accent accuracy require manual trials."
+}

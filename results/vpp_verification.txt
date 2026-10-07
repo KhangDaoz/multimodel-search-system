@@ -1,0 +1,72 @@
+01 Use Case Model | UseCaseDiagram
+  UseCase | Search Order
+  UseCase | View Order
+  UseCase | Search by Image
+  UseCase | View Product
+  UseCase | Search Product
+  UseCase | Search by Voice
+  UseCase | Search by Keyword
+  System | ecomerce
+  Actor | Customer
+  Generalization | 
+  Generalization | 
+  Generalization | 
+  Association | 
+  Association | 
+  Association | 
+  Association | null
+03 Voice Search Sequence | InteractionDiagram
+  Activation | Activation
+  Activation | Activation
+  InteractionActor | Customer
+  InteractionLifeLine | SearchUI
+  InteractionLifeLine | SpeechService
+  InteractionLifeLine | QueryService
+  InteractionLifeLine | SearchService
+  InteractionLifeLine | ProductRepository
+  InteractionLifeLine | RankingService
+  Message | record / upload audio
+  Message | transcribe_audio(bytes)
+  Message | text (Vosk offline)
+  Message | voice_query(text)
+  Message | common query dictionary
+  Message | search(query, top_k)
+  Message | all_products()
+  Message | product data
+  Message | rank(candidates, top_k)
+  Message | ranked results + scores
+  Message | response
+  Message | display results
+02 Three Layer Architecture | ComponentDiagram
+  Component | SearchUI
+  Component | VoiceInput
+  Component | ImageUpload
+  Component | SearchResultView
+  Package | Presentation Layer
+  Component | QueryService
+  Component | SpeechService
+  Component | ImageService
+  Component | SearchService
+  Component | RankingService
+  Package | Application / Intelligence Layer
+  Component | ProductRepository
+  Component | OrderRepository
+  Component | VectorIndex
+  Component | ProductDatabase
+  Component | OrderDatabase
+  Component | ImageStorage
+  Package | Data Layer
+  Dependency | null
+  Dependency | null
+  Dependency | null
+  Dependency | null
+  Dependency | null
+  Dependency | null
+  Dependency | null
+  Dependency | null
+  Dependency | null
+  Dependency | null
+  Dependency | null
+  Dependency | null
+  Dependency | null
+  Dependency | null

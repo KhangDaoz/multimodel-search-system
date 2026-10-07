@@ -13,6 +13,13 @@ not images of specific products in the prototype dataset):
 - `images/shirts.jpg`: https://images.unsplash.com/photo-1521572163474-6864f9cf17ab
 
 Unsplash license: https://unsplash.com/license
-Product cards use the actual original synthetic dataset images, served through
-application services. These same images are used by image retrieval.
+Product cards use the locally bundled V02 catalog photographs, served through
+application services. These same photographs are used by image retrieval.
 All runtime assets are local; the storefront makes no CDN requests.
+
+## V02 catalog
+
+Product cards now use 15 downloaded product photographs from DummyJSON, bundled
+in `data/images/`. Full source URLs are stored per product in `data/products.json`.
+See `data/README.md` for provenance and the sample-data scope. Transparent source
+cutouts are composited onto white, rather than flattened onto black.

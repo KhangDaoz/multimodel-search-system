@@ -1,0 +1,13 @@
+note: Running TeX ...
+warning: Assignment06_Report.tex:301: Underfull \hbox (badness 10000) in paragraph at lines 300--301
+warning: Assignment06_Report.tex:301: Underfull \hbox (badness 10000) in paragraph at lines 300--301
+warning: Assignment06_Report.tex:301: Underfull \hbox (badness 2073) in paragraph at lines 300--301
+note: Rerunning TeX because "Assignment06_Report.out" changed ...
+warning: Assignment06_Report.tex:301: Underfull \hbox (badness 10000) in paragraph at lines 300--301
+warning: Assignment06_Report.tex:301: Underfull \hbox (badness 10000) in paragraph at lines 300--301
+warning: Assignment06_Report.tex:301: Underfull \hbox (badness 2073) in paragraph at lines 300--301
+warning: warnings were issued by the TeX engine; use --print and/or --keep-logs for details.
+note: Running xdvipdfmx ...
+note: Writing `reports/Assignment06_Report.pdf` (856.822265625 KiB)
+note: Writing `reports/Assignment06_Report.log` (24.982421875 KiB)
+note: Skipped writing 3 intermediate files (use --keep-intermediates to keep them)

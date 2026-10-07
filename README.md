@@ -1,221 +1,198 @@
-# Multimodal Search System for E-Commerce
+# FORME — Assignment 06 V02
 
-This Assignment 06 prototype lets users search for products using **text, simulated voice, or images**. It also supports order lookup by customer ID. You can use it in a web browser or from the command line (CLI).
+A three-layer e-commerce search prototype with **text, real offline voice,
+product-photo search and weighted text + image search**. It includes a responsive
+storefront, 15 photographed sample products, common filters, product details,
+customer-scoped order lookup and a browser-local shopping bag.
 
-The program runs locally with the included JSON data and sample images. It needs no API key, database server, microphone, or AI model download. After installing the Python packages, you can use it offline.
+## Install and run
 
-## 1. Python Version and Required Packages
-
-Use **Python 3.10 or later**. Check your version:
-
-```bash
-python --version
-```
-
-If your computer uses `python3`, replace `python` with `python3` in the commands below.
-
-The required packages are listed in `requirements.txt`:
-
-| Package | Version | Purpose |
-|---|---|---|
-| NumPy | `>=2.0,<3` | Work with image vectors and calculate cosine similarity |
-| Pillow | `>=10,<13` | Open images, convert them to RGB, and resize them |
-
-The web server, JSON handling, command-line options, and tests use Python's standard library. Bootstrap, CSS, JavaScript, and website images are included in `presentation/static/`.
-
-## 2. Installation
-
-Open a terminal in the project root folder, which contains `main.py` and `requirements.txt`.
-
-### Linux / macOS
+Python **3.10+** (verified here on Python 3.14), **FFmpeg on PATH**, and the packages
+in `requirements.txt` are required. No API key or cloud account is needed.
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
-```
-
-### Windows (PowerShell)
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-```
-
-In Windows Command Prompt (cmd), activate the environment with `.venv\Scripts\activate.bat`.
-
-Installing packages normally requires an Internet connection. For later runs, activate the virtual environment again; you do not need to reinstall the packages.
-
-## 3. How to Run the Program
-
-### Web Interface (Default)
-
-```bash
+python tools/setup_voice.py
 python main.py
 ```
 
-Open **http://127.0.0.1:8000** in your browser. The terminal also shows the address. Press **Ctrl+C** in that terminal to stop the server.
+On Windows activate with `.venv\Scripts\Activate.ps1` in PowerShell; use
+`.venv\Scripts\activate.bat` in cmd. Install FFmpeg and ensure `ffmpeg -version`
+works in that terminal. Common FFmpeg installers: `sudo apt install ffmpeg`
+(Ubuntu/Debian), `sudo dnf install ffmpeg-free` (Fedora), `brew install ffmpeg`
+(macOS), or `winget install Gyan.FFmpeg` (Windows).
 
-If you get `OSError: [Errno 98] Address already in use`, another program is using the port. Stop the previous server with Ctrl+C, or choose a different port:
+The setup script downloads the official **vosk-model-small-en-us-0.15** English
+model (~40 MB; Apache 2.0). It is already installed in this workspace under
+`models/`; the script is safe to rerun. Override its path with `VOSK_MODEL_PATH`.
+Dependencies/model require Internet for first installation. All search, audio
+recognition, photographs, Bootstrap and UI assets then work locally offline.
 
-```bash
-python main.py --web --port 8080
-```
+Open **http://127.0.0.1:8000**. Stop with Ctrl+C. Use `python main.py --port 8080`
+if port 8000 is busy. The server binds to localhost. This project has not been
+published to a cloud hosting provider.
 
-Then open **http://127.0.0.1:8080**.
+## Use the storefront
 
-To search in the browser:
+- **Text:** try `blue shoes`, `dark sneakers`, `Nike shoes under 100 dollars`,
+  `black bag`, or `where is my latest order`.
+- **Voice:** press **Start recording**, grant microphone access and speak in
+  **English**. Press **Stop & search**; recording also stops after 12 seconds.
+  The page shows what Vosk recognized and searches automatically. Alternatively
+  upload a real WAV/WebM/Ogg/MP4 recording. There is no typed transcript in the
+  web voice mode. Audio is processed temporarily and discarded by the server.
+- **Image:** upload a photograph. Try `data/images/p03.png` or the transformed
+  query `data/images/query_blue_trainers.png`. Product details offer sample-image
+  download. Files must be at most 5 MB and images at most 20 megapixels.
+- **Text + image:** enter keywords and upload an image. Adjust **Text importance**:
+  0% uses image scores, 100% uses text scores, 50% combines both equally.
+- **Filters:** choose category, minimum price, strict maximum price and in-stock
+  only, then apply. Filters affect retrieval in every product-search mode.
+  A textual `under`/`below` ceiling and form ceiling use the stricter value.
+- **Details and bag:** cards display real catalog photos, sample ratings, price
+  and stock. Open details or add available items to the shopping bag. Quantities
+  cannot exceed sample stock. The bag persists in localStorage in this browser;
+  it does not reserve inventory or process payments.
+- **Orders:** C001 owns O001 and 20261001 (latest); C002 owns O002. Customer ID is a
+  demo identity, not login/authentication. Lookup checks record ownership.
 
-1. Choose **Text**, **Voice**, or **Image**.
-2. For Text or Voice, enter an English query. Voice uses a typed transcript instead of an audio recording.
-3. For Image, upload an image from your computer. The page allows files up to 5 MB. Try `data/images/p01.png`.
-4. Choose a customer ID and a result limit, then click **Search collection**.
-5. View product names, prices, stock, and search scores. Click **View details** for more information. You can sort the shown results by price or use **View all products** to return to the full catalog.
+Microphone capture needs permission and a supported browser on **localhost or
+HTTPS**. Chrome was checked with real MediaRecorder. Permission denial, missing
+hardware, silence, invalid audio and missing model are handled. Audio upload is
+available when microphone capture is unsupported. Recognition is English-only
+and may mishear words; re-record a clearer query if necessary.
 
-The catalog contains 12 products. Order lookup uses the selected customer ID: order `O001` belongs to `C001`, and order `O002` belongs to `C002`.
-
-### Command-Line Interface (CLI)
-
-Run the default examples for text, simulated voice, images, and orders:
+## Command-line demonstration
 
 ```bash
 python main.py --cli
-```
-
-For a single search, use `--mode` and `--query`. Using `--mode` or `--json` selects CLI mode unless you also specify `--web`.
-
-| Option | Meaning | Default |
-|---|---|---|
-| `--web` | Start the web interface | Used when no CLI option is given |
-| `--cli` | Run the default CLI examples | Off |
-| `--port` | Set the web server port | `8000` |
-| `--mode` | Search type: `text`, `voice`, or `image` | Not set |
-| `--query` | Query text or image path; required with `--mode` | Not set |
-| `--customer` | Customer ID for order lookup | `C001` |
-| `--top-k` | Maximum number of product results; must be a positive integer | `5` |
-| `--json` | Print CLI results as JSON | Off |
-
-You cannot use `--web` and `--cli` together. The web interface allows 1 to 12 results. The CLI accepts any positive integer for `--top-k`.
-
-## 4. Example Commands
-
-Run these commands from the project root folder.
-
-```bash
-# Show all command-line options
-python main.py --help
-
-# Search by keywords
-python main.py --mode text --query "black shoes"
-
-# Search for Nike shoes under $100 and return up to 3 results
-python main.py --mode text --query "find Nike shoes under 100 dollars" --top-k 3
-
-# Simulate voice input using a typed transcript
-python main.py --mode voice --query "find running shoes"
-
-# Search using a sample product image
-python main.py --mode image --query data/images/p01.png
-
-# Search using a separate image that is not in the product catalog
-python main.py --mode image --query data/images/query_blue_shoe.png --top-k 3
-
-# Look up an order for customer C001
-python main.py --mode text --query "find order O001" --customer C001
-
-# Look up an order for customer C002
-python main.py --mode text --query "find order O002" --customer C002
-
-# Find the latest order for the default customer, C001
-python main.py --mode voice --query "where is my latest order"
-
-# Print one search result as JSON
-python main.py --mode text --query "blue shoes" --json
-
-# Print all default examples as JSON
+python main.py --mode text --query 'Nike shoes under 100 dollars' --top-k 3
+python main.py --mode audio --query tests/fixtures/blue_shoes.wav
+python main.py --mode image --query data/images/p03.png
+python main.py --mode multimodal --query 'blue shoes' \
+  --image data/images/p03.png --text-weight 0.7
+python main.py --mode text --query 'find order O002' --customer C002
 python main.py --json
 ```
 
-Relative image paths start from your terminal's current folder. For an image elsewhere, use an absolute path. Put the path in quotes if it contains spaces. The program loads catalog data from its own module folder.
+`--mode audio` reads actual audio bytes and recognizes them. The legacy
+`--mode voice --query 'blue shoes'` option remains an explicitly simulated
+transcript adapter for CLI regression compatibility; the web rejects typed
+voice requests. `--mode`/`--json` select CLI; `--web` and `--cli` are mutually
+exclusive. Use `--help` for all flags. Image/audio paths are relative to your
+terminal; catalog paths are resolved relative to the project modules.
 
-The `under` and `below` price filters mean **less than** the given price. Products with exactly that price are excluded. An order lookup does not return an order owned by another customer.
-
-## 5. Project Directory Structure
+## Architecture and method
 
 ```text
-multimodel-search-system/
-├── README.md
-├── requirements.txt               # Required Python packages
-├── main.py                        # Set up services and start Web or CLI
-├── evaluate.py                    # Run 17 fixed evaluation cases
-├── application/                   # Search logic
-│   ├── query_service.py           # Process queries and read price filters
-│   ├── speech_service.py          # Simulate speech transcription
-│   ├── image_service.py           # Convert images into feature vectors
-│   ├── search_service.py          # Search products and look up orders
-│   └── ranking_service.py         # Rank results and select top-k
-├── data/                          # Sample data and data access
-│   ├── products.json              # Catalog of 12 products
-│   ├── orders.json                # Sample orders
-│   ├── product_repository.py      # Read products and their images
-│   ├── order_repository.py        # Read orders by customer
-│   ├── vector_index.py            # Image vector index stored in memory
-│   └── images/                    # 12 product images and a separate query image
-├── presentation/                  # User interfaces
-│   ├── search_ui.py               # Handle input and display CLI results
-│   ├── web_server.py              # Local HTTP server
-│   ├── web_ui.html                # Web page
-│   ├── demo_window.py             # Optional window showing CLI demo output
-│   └── static/                    # CSS, JavaScript, Bootstrap, and website images
-│       └── ASSETS.md              # Asset sources and licenses
-├── tests/
-│   ├── test_search.py             # Search tests
-│   └── test_web.py                # HTTP interface tests
-└── uml/
-    ├── Assignment06.vpp           # Visual Paradigm UML project
-    └── README.md                  # Instructions for opening the UML model
+Customer → presentation (browser/HTTP handler/SearchUI)
+         → application (Query/Speech/Image/Search/Ranking services)
+         → data (Product/Order repositories, JSON, images, VectorIndex)
 ```
 
-The main flow is: **user input → process text or image → search → rank → display results**. Data is stored in JSON files. The image index is built in memory each time the program starts.
+Text, recognized voice, images and combined inputs create the same query fields:
+`type`, `intent`, `query`, `tokens`, `embedding`, `filters`, `customer_id`,
+`text_weight`. UI data access goes through application services. `main.build_ui`
+is the composition root. Candidate retrieval and final ranking are separate.
 
-## 6. Tests and Evaluation
+Text relevance is matched distinct query tokens / total distinct query tokens,
+with a finite English synonym dictionary. Image descriptors normalize foreground,
+fit a 16×16 RGB image and invert channels to reduce white-background influence
+(768 features). This is **handcrafted pixel similarity**, not a pretrained vision
+model. Cosine similarity is clamped to [0,1]. The index is built in memory at
+startup. Combined relevance is:
 
-Run the tests:
+`score = text_weight × text_score + (1 − text_weight) × image_score`
+
+The response exposes both contributions. Filters remove ineligible candidates
+before ranking. Ranking uses descending score, ascending ID for ties, then top-k.
+Similarity/relevance scores are not correctness probabilities. Image retrieval
+has no learned relevance-rejection threshold and can return unrelated neighbors.
+
+HTTP routes: `GET /api/catalog` (optional category/min_price/max_price/in_stock),
+`GET /api/products/<id>`, `GET /api/product-images/<id>`, `GET /api/voice-status`,
+`POST /api/search` (text/image/multimodal), `POST /api/voice-search` (Base64 audio),
+`GET /static/<path>`. JSON request bodies are capped at 8 MB. Uploaded recordings
+are capped at 15 seconds and decoded with a timeout. Invalid data returns 400;
+missing voice installation returns 503. Browser microphone capture stops at 12
+seconds. Product limit is 1–15 on the web.
+
+## Project files
+
+```text
+main.py                       Composition root, web/CLI
+application/                  Query, speech, image, retrieval, fusion, ranking
+presentation/                 HTTP server, SearchUI, HTML/CSS/JS and local assets
+data/                         Catalog, orders, product photographs and provenance
+models/                       Downloaded Vosk model (ignored by Git)
+tests/                        Service/HTTP/audio tests and actual WAV fixtures
+tools/setup_voice.py          Reproducible voice model installation
+tools/verify_browser.py       Browser checks and current screenshots
+tools/update_report.py        V02 report with tables from recorded evidence
+tools/verify_submission.py    Submission/UML/report consistency checks
+requirements.txt              Runtime NumPy, Pillow and Vosk
+requirements-dev.txt          Optional Playwright for browser verification
+evaluate.py                   Fixed V02 queries, latency, demos and failures
+results/                      Tests, evaluation, demos, browser/UML evidence
+uml/Assignment06.vpp          Editable native VP V02 project
+uml/Assignment06_V01.vpp      Preserved V01 project
+reports/Assignment06_Report.tex  Current English report source
+reports/Assignment06_Report.pdf  Compiled V02 report
+reports/figures/              Current VP and running-storefront screenshots
+reports/archive/              Preserved original V01 LaTeX
+V02_CHECKLIST.md               Plan, Table 4 rubric and final evidence
+```
+
+## Verification and results
 
 ```bash
 python -m unittest discover -s tests -v
-```
-
-Run the 17 fixed evaluation cases:
-
-```bash
 python evaluate.py
+python tools/verify_submission.py
+# Optional browser suite:
+python -m pip install -r requirements-dev.txt
+python -m playwright install chromium
+python tools/verify_browser.py
+# Or point CHROME_PATH at an existing Chromium/Chrome executable.
 ```
 
-The evaluation prints results in the terminal and creates a `results/` folder with:
+Current evidence: **25/25 unit/HTTP tests**, **19/19 browser checks**, **28/30
+queries (93.33%)**, including **27/27 acceptance cases** and three labeled
+limitation probes. Evaluation writes `results/evaluation.json`, a full Markdown
+table and `results/demo.json`. CLI/audio/fusion outputs are also saved as text.
+The V01 baseline (14/17) is retained; dataset/cases changed, so the two rates
+must not be presented as a controlled benchmark comparison.
 
-- `results/evaluation.json`: inputs, expected and actual results, pass/fail status, and processing time.
-- `results/evaluation.md`: a results table and the pass rate.
+Actual audio fixtures are synthesized with eSpeak NG. Chromium's virtual
+microphone feeds such a WAV into real MediaRecorder; audio decoding/Vosk are
+not mocked. The checks verify integration, **not human accent accuracy or a
+physical microphone**. A `black bag` recording is misrecognized and its failure
+is retained. An unstated budget preference also fails by design. A semantic
+probe passes through a catalog description match without proving semantic AI.
 
-Each case checks the first product or order ID, or checks that there is no result. Some cases are designed to show the prototype's limits. The pass rate does not measure accuracy on real product photos.
+The photo checks use catalog self-images and a resized/rotated image, not a large
+independent photo dataset. Small sample data, English aliases, pixel descriptors,
+recognition errors, demo identity and JSON/in-memory storage remain limitations.
+Real image/semantic embeddings, human speech trials and authentication are
+future extensions. The V02 rubric self-assessment is **94/100**, not a guaranteed
+grading outcome. See `V02_CHECKLIST.md` for evidence and deductions.
 
-To open the optional CLI demo viewer:
+## Report and submission
 
-```bash
-python presentation/demo_window.py
-```
+The compiled PDF and editable LaTeX are in `reports/`. The current report has the
+11 recommended sections, native VP figures, actual audio-web screenshot, saved
+demo scores, evaluation/failures and the Table 4 self-assessment. Rebuild source
+tables with `python tools/update_report.py` after evaluation. Compile the report
+with pdfLaTeX (twice) or Tectonic; see `reports/OVERLEAF_README.md`.
 
-This viewer needs **Tkinter**. Some Linux distributions provide it through the `python3-tk` system package. The Web, CLI, and evaluation do not need Tkinter.
+`uml/Assignment06.vpp` opens in Visual Paradigm 18.1+. Figures were exported from
+the saved V02 project. V01 originals remain preserved. Catalog provenance:
+`data/README.md`; storefront assets: `presentation/static/ASSETS.md`;
+audio-fixture scope: `tests/fixtures/README.md`.
 
-## 7. Prototype Limitations
-
-- **Voice input is simulated.** Users type a transcript. The program does not record a microphone, read audio files, or perform real speech recognition.
-- **Text search matches keywords.** It counts matching words in product information. It is designed for English queries and does not understand synonyms, meaning, or Vietnamese queries. For example, `dark sneakers` may not find the same products as `black shoes`.
-- **Image search uses simple pixel features.** Images are converted to RGB and resized to 16 × 16 pixels. An 11 × 11 center area produces a vector of 363 values. There is no deep learning model. Changes in color, camera angle, or background can affect results.
-- **Identical images can give incorrect product matches.** The sample images are simple generated shapes. Different products may use identical images. When scores are equal, the smaller product ID comes first.
-- **Image search has no minimum similarity score.** It returns the closest top-k images even when the query image is unrelated to the catalog. A similarity score is not a probability that the match is correct.
-- **Filters and ranking are basic.** The program supports maximum prices through `under` or `below`. It does not infer preferences or a budget that the user has not stated. Price sorting on the web page only sorts the results already shown.
-- **The dataset and evaluation are small.** There are only 12 sample products. Evaluation includes catalog images and one changed image, so it does not show how well the system works on real-world data.
-- **There is no user authentication.** The customer option is a test identity value. Checking order ownership does not replace a real login and access control system.
-- **The system is for local demonstrations.** It uses JSON files and an in-memory index rather than a production database or a large vector index. The server listens only on `127.0.0.1`. Checkout, payments, and product management are not included.
+References: [Vosk installation](https://alphacephei.com/vosk/install),
+[official models](https://alphacephei.com/vosk/models),
+[MediaRecorder](https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder),
+[DummyJSON catalog](https://github.com/Ovi/DummyJSON/blob/master/database/products.json).

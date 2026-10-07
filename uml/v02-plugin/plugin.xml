@@ -1,0 +1,1 @@
+<plugin id="assignment06.v02" name="Assignment 06 V02 Update" description="Update native voice sequence to real offline recognition" provider="Khang" class="assignment.UpdateV02"><runtime><library path="classes" relativePath="true"/></runtime></plugin>

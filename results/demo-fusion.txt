@@ -1,0 +1,9 @@
+
+INPUT [multimodal]: blue shoes
+PROCESSING: normalize/tokenize -> encode image -> text and cosine retrieval -> weighted score fusion -> category/price/stock filters -> rank candidates -> top-k
+QUERY REPRESENTATION: multimodal; embedding dimension=768
+ 3 | Puma Future Rider Trainers | $ 89.99 | score=1.000000
+ 2 | Nike Baseball Cleats     | $ 79.99 | score=0.615041
+ 5 | Sports Sneakers Off White Red | $109.99 | score=0.583182
+ 1 | Nike Air Jordan 1 Red And Black | $149.99 | score=0.567670
+11 | Blue Women's Handbag     | $ 49.99 | score=0.566145

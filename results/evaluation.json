@@ -1,0 +1,308 @@
+{
+  "version": "V02",
+  "total": 30,
+  "successful": 28,
+  "success_rate": 0.9333333333333333,
+  "acceptance_total": 27,
+  "acceptance_successful": 27,
+  "criterion": "Expected top-1 product/order ID or no result; cases fixed before running.",
+  "scope": "Small sample catalog. Self-images and one transformed query, not independent real-world visual benchmark. Audio fixtures are synthesized speech, not human microphone recordings. Limitation probes are included and labeled.",
+  "cases": [
+    {
+      "mode": "text",
+      "input": "black shoes",
+      "expected": 1,
+      "note": "Color/category relevance",
+      "actual": 1,
+      "success": true,
+      "latency_ms": 0.49
+    },
+    {
+      "mode": "text",
+      "input": "blue shoes",
+      "expected": 3,
+      "note": "Color/category relevance",
+      "actual": 3,
+      "success": true,
+      "latency_ms": 0.18
+    },
+    {
+      "mode": "text",
+      "input": "Nike shoes under 100 dollars",
+      "expected": 2,
+      "note": "Explicit budget",
+      "actual": 2,
+      "success": true,
+      "latency_ms": 0.125
+    },
+    {
+      "mode": "text",
+      "input": "Puma trainers",
+      "expected": 3,
+      "note": "Brand and synonym",
+      "actual": 3,
+      "success": true,
+      "latency_ms": 0.168
+    },
+    {
+      "mode": "text",
+      "input": "black bag",
+      "expected": 15,
+      "note": "Matching bag photograph",
+      "actual": 15,
+      "success": true,
+      "latency_ms": 0.161
+    },
+    {
+      "mode": "text",
+      "input": "blue bag",
+      "expected": 11,
+      "note": "Color/category",
+      "actual": 11,
+      "success": true,
+      "latency_ms": 0.158
+    },
+    {
+      "mode": "text",
+      "input": "white shirt",
+      "expected": 7,
+      "note": "Sold-out item remains visible without filter",
+      "actual": 7,
+      "success": true,
+      "latency_ms": 0.167
+    },
+    {
+      "mode": "text",
+      "input": "plaid shirt",
+      "expected": 8,
+      "note": "Product-specific keywords",
+      "actual": 8,
+      "success": true,
+      "latency_ms": 0.157
+    },
+    {
+      "mode": "text",
+      "input": "dark sneakers",
+      "expected": 1,
+      "note": "Finite synonym dictionary",
+      "actual": 1,
+      "success": true,
+      "latency_ms": 0.163
+    },
+    {
+      "mode": "text",
+      "input": "spaceship",
+      "expected": null,
+      "note": "Unknown query",
+      "actual": null,
+      "success": true,
+      "latency_ms": 0.153
+    },
+    {
+      "mode": "text",
+      "input": "",
+      "expected": null,
+      "note": "Empty service query",
+      "actual": null,
+      "success": true,
+      "latency_ms": 0.15
+    },
+    {
+      "mode": "text",
+      "input": "find order O001",
+      "expected": "O001",
+      "note": "Order owner C001",
+      "actual": "O001",
+      "success": true,
+      "latency_ms": 0.068
+    },
+    {
+      "mode": "text",
+      "input": "where is my latest order",
+      "expected": "20261001",
+      "note": "Latest date",
+      "actual": "20261001",
+      "success": true,
+      "latency_ms": 0.015
+    },
+    {
+      "mode": "text",
+      "input": "find order O002",
+      "expected": null,
+      "note": "Other customer excluded",
+      "actual": null,
+      "success": true,
+      "latency_ms": 0.011
+    },
+    {
+      "mode": "text",
+      "input": "find order O002",
+      "customer": "C002",
+      "expected": "O002",
+      "note": "Correct owner",
+      "actual": "O002",
+      "success": true,
+      "latency_ms": 0.009
+    },
+    {
+      "mode": "text",
+      "input": "shoes",
+      "filters": {
+        "max_price": 79.99
+      },
+      "expected": null,
+      "note": "Strict ceiling excludes boundary",
+      "actual": null,
+      "success": true,
+      "latency_ms": 0.099
+    },
+    {
+      "mode": "text",
+      "input": "bag",
+      "filters": {
+        "category": "bag",
+        "max_price": 60
+      },
+      "expected": 11,
+      "note": "Category and price",
+      "actual": 11,
+      "success": true,
+      "latency_ms": 0.059
+    },
+    {
+      "mode": "text",
+      "input": "shirt",
+      "filters": {
+        "category": "shirt",
+        "in_stock": true
+      },
+      "expected": 6,
+      "note": "Availability",
+      "actual": 6,
+      "success": true,
+      "latency_ms": 0.056
+    },
+    {
+      "mode": "image",
+      "input": "data/images/p01.png",
+      "expected": 1,
+      "note": "Self-image sanity check",
+      "actual": 1,
+      "success": true,
+      "latency_ms": 24.292
+    },
+    {
+      "mode": "image",
+      "input": "data/images/p03.png",
+      "expected": 3,
+      "note": "Self-image sanity check",
+      "actual": 3,
+      "success": true,
+      "latency_ms": 23.924
+    },
+    {
+      "mode": "image",
+      "input": "data/images/p05.png",
+      "expected": 5,
+      "note": "Distinct photograph fixes V01 duplicate",
+      "actual": 5,
+      "success": true,
+      "latency_ms": 24.936
+    },
+    {
+      "mode": "image",
+      "input": "data/images/p11.png",
+      "expected": 11,
+      "note": "Bag self-image",
+      "actual": 11,
+      "success": true,
+      "latency_ms": 22.837
+    },
+    {
+      "mode": "image",
+      "input": "data/images/query_blue_trainers.png",
+      "expected": 3,
+      "note": "Resized and rotated query, not indexed",
+      "actual": 3,
+      "success": true,
+      "latency_ms": 3.91
+    },
+    {
+      "mode": "multimodal",
+      "input": "blue shoes",
+      "image_path": "data/images/p03.png",
+      "text_weight": 0.7,
+      "expected": 3,
+      "note": "Weighted text/image agreement",
+      "actual": 3,
+      "success": true,
+      "latency_ms": 25.661
+    },
+    {
+      "mode": "multimodal",
+      "input": "black bag",
+      "image_path": "data/images/p15.png",
+      "text_weight": 0.5,
+      "expected": 15,
+      "note": "Combined bag query",
+      "actual": 15,
+      "success": true,
+      "latency_ms": 26.624
+    },
+    {
+      "mode": "multimodal",
+      "input": "shoes",
+      "image_path": "data/images/p03.png",
+      "filters": {
+        "category": "shoes",
+        "max_price": 100
+      },
+      "expected": 3,
+      "note": "Fusion with filters",
+      "actual": 3,
+      "success": true,
+      "latency_ms": 26.316
+    },
+    {
+      "mode": "audio",
+      "input": "tests/fixtures/blue_shoes.wav",
+      "expected": 3,
+      "note": "Actual WAV decoding; eSpeak synthetic speech fixture",
+      "actual": 3,
+      "success": true,
+      "latency_ms": 1059.544,
+      "recognized_text": "i'm blue shoes"
+    },
+    {
+      "mode": "audio",
+      "input": "tests/fixtures/black_bag.wav",
+      "expected": 15,
+      "note": "Recognition robustness probe: synthetic speech",
+      "probe": true,
+      "actual": 1,
+      "success": false,
+      "latency_ms": 719.963,
+      "recognized_text": "the black man"
+    },
+    {
+      "mode": "text",
+      "input": "comfortable footwear",
+      "expected": 3,
+      "note": "Unsupported semantic intent",
+      "probe": true,
+      "actual": 3,
+      "success": true,
+      "latency_ms": 0.167
+    },
+    {
+      "mode": "text",
+      "input": "black shoes",
+      "expected": 2,
+      "note": "Unstated budget preference; not a functional requirement",
+      "probe": true,
+      "actual": 1,
+      "success": false,
+      "latency_ms": 0.166
+    }
+  ]
+}
